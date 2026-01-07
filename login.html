@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | News Platform</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/supabase.js" defer></script>
+  <script type="module" src="js/auth.js" defer></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html" id="login-link">Login</a></li>
+        <li><a href="register.html" id="register-link">Register</a></li>
+        <li><a href="create.html" id="create-link" style="display:none;">Create Article</a></li>
+        <li><a href="#" id="logout-link" style="display:none;">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Login</h1>
+    <p id="error" style="color:red;"></p>
+    <form id="login-form">
+      <div>
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <label for="password">Password</label><br>
+        <input type="password" id="password" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 News Platform</p>
+  </footer>
+
+  <script type="module">
+    import { login, getCurrentUser, logout } from './js/auth.js';
+    import { supabase } from './js/supabase.js';
+
+    // Redirect logged-in users to homepage
+    (async () => {
+      const user = await getCurrentUser();
+      if (user) window.location.href = "index.html";
+    })();
+
+    // Logout link
+    document.querySelector("#logout-link").addEventListener("click", async (e) => {
+      e.preventDefault();
+      await logout();
+      window.location.href = "login.html";
+    });
+
+    // Show/hide nav links based on auth state
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        document.querySelector("#login-link").style.display = "none";
+        document.querySelector("#register-link").style.display = "none";
+        document.querySelector("#create-link").style.display = "block";
+        document.querySelector("#logout-link").style.display = "block";
+      } else {
+        document.querySelector("#login-link").style.display = "block";
+        document.querySelector("#register-link").style.display = "block";
+        document.querySelector("#create-link").style.display = "none";
+        document.querySelector("#logout-link").style.display = "none";
+      }
+    });
+
+    // Handle login form
+    const form = document.querySelector("#login-form");
+    const errorMsg = document.querySelector("#error");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = form.email.value.trim();
+      const password = form.password.value.trim();
+
+      if (!email || !password) {
+        errorMsg.textContent = "Email and password are required.";
+        return;
+      }
+
+      const { data, error } = await login(email, password);
+
+      if (error) {
+        errorMsg.textContent = error.message;
+      } else {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
