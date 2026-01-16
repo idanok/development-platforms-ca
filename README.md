@@ -76,3 +76,12 @@ I chose Option 2 (Supabase frontend) because I enjoy building full-stack applica
 - Using Supabase saved a lot of setup time compared to building a custom API.
 - A custom API offers more control, but Supabase is ideal for rapid development and learning how modern platform-as-a-service solutions work.
 
+# Known Limitations
+- No article editing or deletion
+- No user profile page
+- Tailwind is loaded via CDN (not production optimized)
+- No pagination on the article list
+
+# Repository
+GitHub repository:
+https://github.com/YOUR_USERNAME/development-platforms-ca
