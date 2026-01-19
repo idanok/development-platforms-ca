@@ -15,7 +15,6 @@ Articles include:
 - Body
 - Category
 - Submission date
-- Linked user (author)
 
 - Responsive design
 - Error handling and user feedback
@@ -30,6 +29,7 @@ Articles include:
 - PostgreSQL database
 - Row Level Security (RLS)
 - Git & GitHub
+- Prettier 
 
 
 # How to Run the Project Locally
@@ -42,25 +42,29 @@ code .
 
 ## 3. Add Supabase credentials
 js/supabase.js
-Replace the placeholders with your own Supabase project details:
-const SUPABASE_URL = "https://your-project-id.supabase.co";
-const SUPABASE_ANON_KEY = "your-anon-public-key";
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const SUPABASE_URL = "https://dkmuwvuvmwrsoxpkjzhn.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_nStW_u_1lnWbpQ0VXuxMfA_0M9-gUYK";
+
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
 ## 4. Run the project
 Because this is a frontend-only project, you can open it using:
 Live Server extension in VS Code, or
-By opening index.html directly in your browser
+by opening index.html directly in your browser
 
 # Authentication & Security
 Supabase Auth is used for user registration and login
 Email confirmation is enabled
 Row Level Security (RLS) ensures:
-Anyone can read articles
-Only authenticated users can insert articles
-The UI updates automatically based on authentication state
+- Anyone can read articles
+- Only authenticated users can insert articles
+- The UI updates automatically based on authentication state
 
 # Motivation
-I chose Option 2 (Supabase frontend) because I enjoy building full-stack applications where I can work with both frontend and backend functionality at the same time.
+I chose Option 2 (Supabase frontend) because I enjoy building full-stack applications where I can work with both frontend and backend functionality at the same time
 
 ## What I liked
 - Working with Supabase made authentication and database management much easier
@@ -73,13 +77,13 @@ I chose Option 2 (Supabase frontend) because I enjoy building full-stack applica
 - Configuring Supabase correctly the first time
 
 ## Custom API vs Supabase
-- Using Supabase saved a lot of setup time compared to building a custom API.
-- A custom API offers more control, but Supabase is ideal for rapid development and learning how modern platform-as-a-service solutions work.
+- Using Supabase saved a lot of setup time compared to building a custom API
+- A custom API offers more control, but Supabase is ideal for rapid development and learning how modern platform-as-a-service solutions work
 
 # Known Limitations
 - No article editing or deletion
 - No user profile page
-- Tailwind is loaded via CDN (not production optimized)
+- Tailwind is loaded via CDN
 - No pagination on the article list
 
 # Repository
