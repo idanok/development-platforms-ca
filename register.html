@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register | News Platform</title>
 
-  <!-- Tailwind CDN (OK for course assignment) -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script type="module" src="js/supabase.js" defer></script>
@@ -17,14 +17,14 @@
   <!-- Navigation -->
   <header class="bg-white shadow">
     <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-xl font-bold text-blue-600">
+      <a href="index.html" class="text-xl font-bold text-green-700">
         News Platform
       </a>
       <ul class="flex gap-4">
-        <li><a href="index.html" class="text-gray-600 hover:text-blue-600">Home</a></li>
-        <li><a href="login.html" id="login-link" class="text-gray-600 hover:text-blue-600">Login</a></li>
-        <li><a href="register.html" id="register-link" class="text-gray-600 hover:text-blue-600">Register</a></li>
-        <li><a href="create.html" id="create-link" class="hidden text-gray-600 hover:text-blue-600">Create</a></li>
+        <li><a href="index.html" class="text-gray-600 hover:text-green-700">Home</a></li>
+        <li><a href="login.html" id="login-link" class="text-gray-600 hover:text-green-700">Login</a></li>
+        <li><a href="register.html" id="register-link" class="text-gray-600 hover:text-green-700">Register</a></li>
+        <li><a href="create.html" id="create-link" class="hidden text-gray-600 hover:text-green-700">Create</a></li>
         <li><a href="#" id="logout-link" class="hidden text-red-600 hover:underline">Logout</a></li>
       </ul>
     </nav>
@@ -33,7 +33,9 @@
   <!-- Main -->
   <main class="flex-grow flex items-center justify-center px-4">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <h1 class="text-2xl font-bold mb-6 text-center">Register</h1>
+      <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">
+        Register
+      </h1>
 
       <p id="error" class="text-red-500 text-sm mb-4"></p>
 
@@ -45,7 +47,7 @@
             id="email"
             name="email"
             required
-            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-green-400"
           />
         </div>
 
@@ -56,13 +58,13 @@
             id="password"
             name="password"
             required
-            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300"
+            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-green-400"
           />
         </div>
 
         <button
           type="submit"
-          class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          class="w-full bg-green-700 text-white py-2 rounded hover:bg-green-800 transition"
         >
           Register
         </button>
@@ -70,7 +72,9 @@
 
       <p class="text-sm text-center mt-4">
         Already have an account?
-        <a href="login.html" class="text-blue-600 hover:underline">Login</a>
+        <a href="login.html" class="text-green-700 hover:underline">
+          Login
+        </a>
       </p>
     </div>
   </main>
