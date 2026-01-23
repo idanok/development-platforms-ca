@@ -1,137 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register | News Platform</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | News Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="js/supabase.js" defer></script>
+    <script type="module" src="js/auth.js" defer></script>
+  </head>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script type="module" src="js/supabase.js" defer></script>
-  <script type="module" src="js/auth.js" defer></script>
-</head>
-
-<body class="bg-gray-100 min-h-screen flex flex-col">
-
-  <!-- Navigation -->
-  <header class="bg-white shadow">
-    <nav class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-xl font-bold text-green-700">
-        News Platform
-      </a>
-      <ul class="flex gap-4">
-        <li><a href="index.html" class="text-gray-600 hover:text-green-700">Home</a></li>
-        <li><a href="login.html" id="login-link" class="text-gray-600 hover:text-green-700">Login</a></li>
-        <li><a href="register.html" id="register-link" class="text-gray-600 hover:text-green-700">Register</a></li>
-        <li><a href="create.html" id="create-link" class="hidden text-gray-600 hover:text-green-700">Create</a></li>
-        <li><a href="#" id="logout-link" class="hidden text-red-600 hover:underline">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Main -->
-  <main class="flex-grow flex items-center justify-center px-4">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">
-        Register
-      </h1>
-
-      <p id="error" class="text-red-500 text-sm mb-4"></p>
-
-      <form id="register-form" class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium mb-1" for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-green-400"
-          />
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium mb-1" for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-green-400"
-          />
-        </div>
-
-        <button
-          type="submit"
-          class="w-full bg-green-700 text-white py-2 rounded hover:bg-green-800 transition"
-        >
-          Register
-        </button>
-      </form>
-
-      <p class="text-sm text-center mt-4">
-        Already have an account?
-        <a href="login.html" class="text-green-700 hover:underline">
-          Login
+  <body class="bg-gray-100 min-h-screen flex flex-col">
+    <header class="bg-white shadow">
+      <nav
+        class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <a href="index.html" class="text-xl font-bold text-green-700">
+          News Platform
         </a>
-      </p>
-    </div>
-  </main>
+        <ul class="flex gap-4">
+          <li>
+            <a href="index.html" class="text-gray-600 hover:text-green-700"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="login.html"
+              id="login-link"
+              class="text-gray-600 hover:text-green-700"
+              >Login</a
+            >
+          </li>
+          <li>
+            <a
+              href="register.html"
+              id="register-link"
+              class="text-gray-600 hover:text-green-700"
+              >Register</a
+            >
+          </li>
+          <li>
+            <a
+              href="create.html"
+              id="create-link"
+              class="hidden text-gray-600 hover:text-green-700"
+              >Create</a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              id="logout-link"
+              class="hidden text-red-600 hover:underline"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <!-- Footer -->
-  <footer class="bg-white text-center py-4 text-sm text-gray-500">
-    &copy; 2026 News Platform
-  </footer>
+    <main class="flex-grow flex items-center justify-center px-4">
+      <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-800">
+          Register
+        </h1>
 
-  <script type="module">
-    import { register, getCurrentUser, logout } from "./js/auth.js";
-    import { supabase } from "./js/supabase.js";
+        <p id="error" class="text-red-500 text-sm mb-4"></p>
 
-    // Redirect logged-in users
-    (async () => {
-      const user = await getCurrentUser();
-      if (user) window.location.href = "index.html";
-    })();
+        <form id="register-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-1" for="email"
+              >Email</label
+            >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-green-400"
+            />
+          </div>
 
-    // Logout
-    document.querySelector("#logout-link").addEventListener("click", async (e) => {
-      e.preventDefault();
-      await logout();
-      window.location.href = "login.html";
-    });
+          <div>
+            <label class="block text-sm font-medium mb-1" for="password"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              class="w-full border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-green-400"
+            />
+          </div>
 
-    // Toggle nav
-    supabase.auth.onAuthStateChange((event, session) => {
-      document.querySelector("#login-link").classList.toggle("hidden", !!session);
-      document.querySelector("#register-link").classList.toggle("hidden", !!session);
-      document.querySelector("#create-link").classList.toggle("hidden", !session);
-      document.querySelector("#logout-link").classList.toggle("hidden", !session);
-    });
+          <button
+            type="submit"
+            class="w-full bg-green-700 text-white py-2 rounded hover:bg-green-800 transition"
+          >
+            Register
+          </button>
+        </form>
 
-    // Register handler
-    const form = document.querySelector("#register-form");
-    const errorMsg = document.querySelector("#error");
+        <p class="text-sm text-center mt-4">
+          Already have an account?
+          <a href="login.html" class="text-green-700 hover:underline">
+            Login
+          </a>
+        </p>
+      </div>
+    </main>
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = form.email.value.trim();
-      const password = form.password.value.trim();
+    <footer class="bg-white text-center py-4 text-sm text-gray-500">
+      &copy; 2026 News Platform
+    </footer>
 
-      if (!email || !password) {
-        errorMsg.textContent = "Email and password are required.";
-        return;
-      }
+    <script type="module">
+      import { register, getCurrentUser, logout } from "./js/auth.js";
+      import { supabase } from "./js/supabase.js";
 
-      const { error } = await register(email, password);
+      // Redirect logged-in users
+      (async () => {
+        const user = await getCurrentUser();
+        if (user) window.location.href = "index.html";
+      })();
 
-      if (error) {
-        errorMsg.textContent = error.message;
-      } else {
-        alert("Registration successful! Check your email to confirm.");
-        window.location.href = "login.html";
-      }
-    });
-  </script>
-</body>
+      // Logout
+      document
+        .querySelector("#logout-link")
+        .addEventListener("click", async (e) => {
+          e.preventDefault();
+          await logout();
+          window.location.href = "login.html";
+        });
+
+      // Toggle nav
+      supabase.auth.onAuthStateChange((event, session) => {
+        document
+          .querySelector("#login-link")
+          .classList.toggle("hidden", !!session);
+        document
+          .querySelector("#register-link")
+          .classList.toggle("hidden", !!session);
+        document
+          .querySelector("#create-link")
+          .classList.toggle("hidden", !session);
+        document
+          .querySelector("#logout-link")
+          .classList.toggle("hidden", !session);
+      });
+
+      // Register handler
+      const form = document.querySelector("#register-form");
+      const errorMsg = document.querySelector("#error");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = form.email.value.trim();
+        const password = form.password.value.trim();
+
+        if (!email || !password) {
+          errorMsg.textContent = "Email and password are required.";
+          return;
+        }
+
+        const { error } = await register(email, password);
+
+        if (error) {
+          errorMsg.textContent = error.message;
+        } else {
+          alert("Registration successful! Check your email to confirm.");
+          window.location.href = "login.html";
+        }
+      });
+    </script>
+  </body>
 </html>

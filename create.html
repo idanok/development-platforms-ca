@@ -1,156 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Article | News Platform</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Article | News Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="js/supabase.js" defer></script>
+    <script type="module" src="js/auth.js" defer></script>
+  </head>
 
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <body class="bg-gray-50 min-h-screen flex flex-col text-gray-800">
+    <header class="bg-green-700 text-white shadow">
+      <nav class="flex justify-between items-center px-6 py-4">
+        <a href="index.html" class="font-bold text-xl">News Platform</a>
 
-  <script type="module" src="js/supabase.js" defer></script>
-  <script type="module" src="js/auth.js" defer></script>
-</head>
+        <ul class="flex gap-4">
+          <li>
+            <a href="login.html" id="login-link" class="hover:underline"
+              >Login</a
+            >
+          </li>
+          <li>
+            <a href="register.html" id="register-link" class="hover:underline"
+              >Register</a
+            >
+          </li>
+          <li>
+            <a
+              href="create.html"
+              id="create-link"
+              class="hover:underline hidden"
+              >Create Article</a
+            >
+          </li>
+          <li>
+            <a href="#" id="logout-link" class="hover:underline hidden"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-<body class="bg-gray-50 min-h-screen flex flex-col text-gray-800">
+    <main class="flex-grow w-full px-6 py-8">
+      <h1 class="text-3xl font-bold text-green-800 mb-6 text-left">
+        Create a New Article
+      </h1>
 
-  <!-- Header / Navigation -->
-  <header class="bg-green-700 text-white shadow">
-    <nav class="flex justify-between items-center px-6 py-4">
-      <a href="index.html" class="font-bold text-xl">News Platform</a>
+      <p id="error" class="text-red-600 mb-4"></p>
 
-      <ul class="flex gap-4">
-        <li><a href="login.html" id="login-link" class="hover:underline">Login</a></li>
-        <li><a href="register.html" id="register-link" class="hover:underline">Register</a></li>
-        <li><a href="create.html" id="create-link" class="hover:underline hidden">Create Article</a></li>
-        <li><a href="#" id="logout-link" class="hover:underline hidden">Logout</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Main Content -->
-  <main class="flex-grow w-full px-6 py-8">
-    <h1 class="text-3xl font-bold text-green-800 mb-6 text-left">
-      Create a New Article
-    </h1>
-
-    <p id="error" class="text-red-600 mb-4"></p>
-
-    <form
-      id="create-article-form"
-      class="bg-white p-6 rounded-lg shadow-md max-w-xl space-y-4"
-    >
-      <div>
-        <label for="title" class="block font-semibold mb-1">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          required
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-        />
-      </div>
-
-      <div>
-        <label for="body" class="block font-semibold mb-1">Body</label>
-        <textarea
-          id="body"
-          name="body"
-          rows="6"
-          required
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-        ></textarea>
-      </div>
-
-      <div>
-        <label for="category" class="block font-semibold mb-1">Category</label>
-        <input
-          type="text"
-          id="category"
-          name="category"
-          required
-          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-        />
-      </div>
-
-      <button
-        type="submit"
-        class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition"
+      <form
+        id="create-article-form"
+        class="bg-white p-6 rounded-lg shadow-md max-w-xl space-y-4"
       >
-        Submit Article
-      </button>
-    </form>
-  </main>
+        <div>
+          <label for="title" class="block font-semibold mb-1">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+        </div>
 
-  <!-- Footer -->
-  <footer class="bg-white border-t text-gray-500 p-4 text-center text-sm">
-    &copy; 2026 News Platform
-  </footer>
+        <div>
+          <label for="body" class="block font-semibold mb-1">Body</label>
+          <textarea
+            id="body"
+            name="body"
+            rows="6"
+            required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+          ></textarea>
+        </div>
 
-  <script type="module">
-    import { supabase } from "./js/supabase.js";
-    import { getCurrentUser, logout } from "./js/auth.js";
+        <div>
+          <label for="category" class="block font-semibold mb-1"
+            >Category</label
+          >
+          <input
+            type="text"
+            id="category"
+            name="category"
+            required
+            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+        </div>
 
-    // Protect page
-    (async () => {
-      const user = await getCurrentUser();
-      if (!user) {
-        window.location.href = "login.html";
-      }
-    })();
+        <button
+          type="submit"
+          class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition"
+        >
+          Submit Article
+        </button>
+      </form>
+    </main>
 
-    // Logout
-    document.querySelector("#logout-link").addEventListener("click", async (e) => {
-      e.preventDefault();
-      await logout();
-      window.location.href = "login.html";
-    });
+    <footer class="bg-white border-t text-gray-500 p-4 text-center text-sm">
+      &copy; 2026 News Platform
+    </footer>
 
-    // Toggle nav links
-    supabase.auth.onAuthStateChange((event, session) => {
-      document.querySelector("#login-link").classList.toggle("hidden", !!session);
-      document.querySelector("#register-link").classList.toggle("hidden", !!session);
-      document.querySelector("#create-link").classList.toggle("hidden", !session);
-      document.querySelector("#logout-link").classList.toggle("hidden", !session);
-    });
+    <script type="module">
+      import { supabase } from "./js/supabase.js";
+      import { getCurrentUser, logout } from "./js/auth.js";
 
-    // Handle form submit
-    const form = document.querySelector("#create-article-form");
-    const errorMsg = document.querySelector("#error");
+      // Protect page
+      (async () => {
+        const user = await getCurrentUser();
+        if (!user) {
+          window.location.href = "login.html";
+        }
+      })();
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+      // Logout
+      document
+        .querySelector("#logout-link")
+        .addEventListener("click", async (e) => {
+          e.preventDefault();
+          await logout();
+          window.location.href = "login.html";
+        });
 
-      const user = await getCurrentUser();
-      if (!user) {
-        errorMsg.textContent = "You must be logged in to submit an article.";
-        return;
-      }
-
-      const title = form.title.value.trim();
-      const body = form.body.value.trim();
-      const category = form.category.value.trim();
-
-      if (!title || !body || !category) {
-        errorMsg.textContent = "All fields are required.";
-        return;
-      }
-
-      const { error } = await supabase.from("articles").insert({
-        title,
-        body,
-        category,
-        user_id: user.id
+      // Toggle nav links
+      supabase.auth.onAuthStateChange((event, session) => {
+        document
+          .querySelector("#login-link")
+          .classList.toggle("hidden", !!session);
+        document
+          .querySelector("#register-link")
+          .classList.toggle("hidden", !!session);
+        document
+          .querySelector("#create-link")
+          .classList.toggle("hidden", !session);
+        document
+          .querySelector("#logout-link")
+          .classList.toggle("hidden", !session);
       });
 
-      if (error) {
-        errorMsg.textContent = error.message;
-      } else {
-        alert("Article created successfully!");
-        window.location.href = "index.html";
-      }
-    });
-  </script>
-</body>
-</html>
+      // Handle form submit
+      const form = document.querySelector("#create-article-form");
+      const errorMsg = document.querySelector("#error");
 
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const user = await getCurrentUser();
+        if (!user) {
+          errorMsg.textContent = "You must be logged in to submit an article.";
+          return;
+        }
+
+        const title = form.title.value.trim();
+        const body = form.body.value.trim();
+        const category = form.category.value.trim();
+
+        if (!title || !body || !category) {
+          errorMsg.textContent = "All fields are required.";
+          return;
+        }
+
+        const { error } = await supabase.from("articles").insert({
+          title,
+          body,
+          category,
+          user_id: user.id,
+        });
+
+        if (error) {
+          errorMsg.textContent = error.message;
+        } else {
+          alert("Article created successfully!");
+          window.location.href = "index.html";
+        }
+      });
+    </script>
+  </body>
+</html>
