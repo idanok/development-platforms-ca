@@ -37,11 +37,12 @@ Articles include:
 git clone https://github.com/YOUR_USERNAME/development-platforms-ca.git
 cd development-platforms-ca
 
-## 2. Open the project
+## 2. Open the project in vs code
 code .
 
 ## 3. Add Supabase credentials
-js/supabase.js
+Open js/supabase.js and add your Supabase project credentials:
+
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
 const SUPABASE_URL = "https://dkmuwvuvmwrsoxpkjzhn.supabase.co";
@@ -49,9 +50,7 @@ const SUPABASE_ANON_KEY = "sb_publishable_nStW_u_1lnWbpQ0VXuxMfA_0M9-gUYK";
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-
 ## 4. Run the project
-Because this is a frontend-only project, you can open it using:
 Live Server extension in VS Code, or
 by opening index.html directly in your browser
 
