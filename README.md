@@ -87,4 +87,4 @@ I chose Option 2 (Supabase frontend) because I enjoy building full-stack applica
 
 # Repository
 GitHub repository:
-https://github.com/YOUR_USERNAME/development-platforms-ca
+https://github.com/idanok/development-platforms-ca/tree/main
