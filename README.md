@@ -62,6 +62,8 @@ Row Level Security (RLS) ensures:
 - Only authenticated users can insert articles
 - The UI updates automatically based on authentication state
 
+You can register a new user to create articles.
+
 # Motivation
 I chose Option 2 (Supabase frontend) because I enjoy building full-stack applications where I can work with both frontend and backend functionality at the same time
 
